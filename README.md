@@ -1,47 +1,47 @@
 # DOCUMENTACIÓN SCRIPT DEL VIDEOJUEGO
 ## Sistema de guardias, escondites, posesión y puertas
-1. Introducción
+### **Introducción**
 El proyecto implementa un conjunto de mecánicas que permiten al jugador desplazarse por el escenario, ser detectado por guardias enemigos, esconderse para evitar su persecución y poseer a un guardia para aprovechar sus características y atravesar determinadas puertas.
 El sistema está dividido en cuatro scripts principales:
-1. Guardia: controla el patrullaje, la detección del jugador y el regreso a su posición inicial cuando el jugador se esconde.
-2. Jugador: gestiona el movimiento, la detección de guardias cercanos y la mecánica de posesión.
-3. Escondite: detecta cuándo el jugador entra o sale de una zona segura y comunica esos cambios mediante señales.
-4. Puerta: administra la colisión de una puerta en función de si el jugador está poseyendo a un guardia.
+1. **Guardia**: controla el patrullaje, la detección del jugador y el regreso a su posición inicial cuando el jugador se esconde.
+2. **Jugador**: gestiona el movimiento, la detección de guardias cercanos y la mecánica de posesión.
+3. **Escondite**: detecta cuándo el jugador entra o sale de una zona segura y comunica esos cambios mediante señales.
+4. **Puerta**: administra la colisión de una puerta en función de si el jugador está poseyendo a un guardia.
 La separación de responsabilidades permite que cada objeto tenga su propia lógica y que los diferentes sistemas se comuniquen entre sí.
-2. Sistema de guardias enemigos
-Objetivo
+### 2. Sistema de guardias enemigos
+**Objetivo**
 El guardia es un enemigo que recorre una zona del escenario, detecta al jugador cuando entra en su área de detección y comienza a perseguirlo. Si el jugador se esconde, el guardia pierde su objetivo, regresa a su posición inicial y retoma su patrullaje.
 Tipo de nodo utilizado
-AnimatableBody2D
+`AnimatableBody2D`
 Este nodo permite representar un cuerpo físico que puede desplazarse mediante el código. En este caso, se utiliza para controlar el movimiento del guardia.
 Variables principales
-● volviendo: indica si el guardia debe regresar a su posición inicial.
-● cambio: controla el sentido del patrullaje.
-● jugador: almacena la referencia al jugador detectado.
-● jugador_escondido: indica si el jugador está dentro de un escondite.
-● persiguiendo: indica si el guardia se encuentra en estado de persecución.
-● posXInicio y posXFin: establecen los límites horizontales del patrullaje.
-● velocidad: determina la velocidad de movimiento.
-● posicion_inicial: almacena la posición global donde comienza el guardia.
-Las variables posXInicio, posXFin y velocidad están declaradas con @export, lo que permite modificarlas desde el Inspector de Godot sin tener que editar el código cada vez.
+● `volviendo`: indica si el guardia debe regresar a su posición inicial.
+● `cambio`: controla el sentido del patrullaje.
+● `jugador`: almacena la referencia al jugador detectado.
+● `jugador_escondido`: indica si el jugador está dentro de un escondite.
+● `persiguiendo`: indica si el guardia se encuentra en estado de persecución.
+● `posXInicio` y `posXFin`: establecen los límites horizontales del patrullaje.
+● `velocidad`: determina la velocidad de movimiento.
+● `posicion_inicial`: almacena la posición global donde comienza el guardia.
+Las variables `posXInicio`, `posXFin` y `velocidad` están declaradas con `@export`, lo que permite modificarlas desde el Inspector de Godot sin tener que editar el código cada vez.
 2.1. Inicialización
-En la función _ready() se guarda la posición inicial del guardia:
-posicion_inicial = global_position
+En la función `_ready()` se guarda la posición inicial del guardia:
+`posicion_inicial` = global_position
 También se establece el límite inicial del patrullaje a partir de la coordenada horizontal del nodo.
 De esta forma, el guardia conserva una referencia al lugar al que debe regresar cuando pierde al jugador.
 2.2. Patrullaje
-El movimiento se ejecuta en _physics_process(delta), una función que Godot llama durante los pasos de física.
-El guardia se desplaza horizontalmente entre dos límites: posXInicio y posXFin.
-● Si se desplaza hacia el límite final, avanza hasta posXFin.
+El movimiento se ejecuta en `_physics_process(delta)`, una función que Godot llama durante los pasos de física.
+El guardia se desplaza horizontalmente entre dos límites: `posXInicio` y `posXFin`.
+● Si se desplaza hacia el límite final, avanza hasta `posXFin`.
 ● Al alcanzar el límite, cambia el valor de cambio.
 ● Cuando se desplaza hacia el límite inicial, retrocede hasta posXInicio.
 ● Al alcanzar ese límite, vuelve a cambiar el sentido del movimiento.
-La expresión velocidad * delta permite ajustar el desplazamiento al tiempo transcurrido entre actualizaciones, en lugar de depender directamente de la cantidad de fotogramas por segundo.
-El código también modifica scale.x para cambiar la orientación horizontal del sprite. En la versión actual se asigna -1 en ambos límites, por lo que la orientación podría necesitar un ajuste posterior para reflejar correctamente los dos sentidos del movimiento.
+La expresión `velocidad * delta` permite ajustar el desplazamiento al tiempo transcurrido entre actualizaciones, en lugar de depender directamente de la cantidad de fotogramas por segundo.
+El código también modifica `scale.x` para cambiar la orientación horizontal del sprite. En la versión actual se asigna -1 en ambos límites, por lo que la orientación podría necesitar un ajuste posterior para reflejar correctamente los dos sentidos del movimiento.
 2.3. Detección y persecución
-La función _on_area_2d_body_entered(body) se ejecuta cuando otro cuerpo entra en el área de detección del guardia.
+La función `_on_area_2d_body_entered(body)` se ejecuta cuando otro cuerpo entra en el área de detección del guardia.
 Primero comprueba si el cuerpo pertenece al grupo Player:
-body.is_in_group("Player")
+`body.is_in_group("Player")`
 Si pertenece a ese grupo y el jugador no está escondido, se guarda su referencia en la variable jugador. Además, se cancela el estado de regreso mediante volviendo = false.
 Durante el procesamiento de física, el guardia comprueba si jugador != null. Si existe una referencia válida, calcula la dirección hacia el jugador con:
 global_position.direction_to(jugador.global_position)
@@ -64,7 +64,7 @@ Resultado: se obtiene un enemigo con tres comportamientos principales: patrullar
 Objetivo
 El jugador puede desplazarse en cuatro direcciones y poseer a un guardia cercano mediante una acción de interacción. Al hacerlo, toma la textura del sprite del enemigo y se coloca en su posición.
 Tipo de nodo utilizado
-CharacterBody2D
+`CharacterBody2D`
 Este nodo está diseñado para personajes que necesitan movimiento controlado por código y detección de colisiones físicas.
 3.1. Movimiento del jugador
 La variable VELOCIDAD establece la velocidad de movimiento en 150.0.
@@ -81,12 +81,12 @@ El nodo AreaPosecion detecta los cuerpos que entran en su área mediante la señ
 La función verifica si el cuerpo pertenece al grupo guardia. Si la comprobación es correcta, guarda ese cuerpo en guardia_cercano.
 La comprobación por grupos permite identificar a los enemigos sin depender exclusivamente del nombre de cada nodo.
 3.3. Activación de la posesión
-Dentro de _physics_process(), el código comprueba si se acaba de pulsar la acción interactuar mediante Input.is_action_just_pressed("interactuar").
+Dentro de `_physics_process()`, el código comprueba si se acaba de pulsar la acción interactuar mediante Input.is_action_just_pressed("interactuar").
 Esta función detecta el momento en que se presiona la acción, evitando que la posesión se active continuamente mientras el botón permanece pulsado.
 Si existe un guardia registrado en guardia_cercano, se llama a poseer_guardia().
 La acción interactuar debe estar configurada previamente en el apartado de mapa de entradas de Godot.
 3.4. Transferencia del sprite
-La función poseer_guardia() comienza comprobando que exista un guardia válido. Si no lo hay, termina sin ejecutar el resto del procedimiento.
+La función `poseer_guardia()` comienza comprobando que exista un guardia válido. Si no lo hay, termina sin ejecutar el resto del procedimiento.
 Después obtiene las referencias a los sprites:
 ● sprite_enemigo: sprite del guardia.
 ● sprite_jugador: sprite del jugador.
