@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://chsrfim4ytdaa"]
+
+[ext_resource type="Script" uid="uid://d1tr3dnn1x1oy" path="res://Scripts/puerta_guardia.gd" id="1_jrf35"]
+[ext_resource type="Texture2D" uid="uid://cwav6jcxgww6p" path="res://Asset/PNG/Default size/Crates/crate_33.png" id="2_aw6ps"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_sp843"]
+size = Vector2(69, 44)
+
+[node name="Puerta_Guardia" type="StaticBody2D" unique_id=1208681684]
+scale = Vector2(4, 4)
+script = ExtResource("1_jrf35")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1486171704]
+texture = ExtResource("2_aw6ps")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1063027129]
+position = Vector2(0.5, 11)
+shape = SubResource("RectangleShape2D_sp843")
