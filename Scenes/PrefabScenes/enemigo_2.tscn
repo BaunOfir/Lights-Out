@@ -1,0 +1,27 @@
+[gd_scene format=3 uid="uid://qje3fxbbrn8"]
+
+[ext_resource type="Script" uid="uid://bjc63jyffknpf" path="res://Scripts/enemigo2.gd" id="1_dstjq"]
+[ext_resource type="Texture2D" uid="uid://dig5qu64mlht1" path="res://Asset/PNG/Retina/Player/player_09.png" id="2_eiukj"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_sp843"]
+
+[node name="Enemigo2" type="CharacterBody2D" unique_id=1295029484]
+script = ExtResource("1_dstjq")
+velocidad = 150.0
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=131927904]
+texture = ExtResource("2_eiukj")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2135043013]
+scale = Vector2(6.9599996, 6.9599996)
+shape = SubResource("CircleShape2D_sp843")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="." unique_id=20791623]
+debug_enabled = true
+debug_path_custom_color = Color(0.60351425, 0.00027107238, 0.60452867, 1)
+
+[node name="Timer" type="Timer" parent="." unique_id=579472803]
+wait_time = 0.5
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

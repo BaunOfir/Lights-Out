@@ -1,6 +1,53 @@
 [gd_scene format=3 uid="uid://fc3x80j1sfno"]
 
 [ext_resource type="PackedScene" uid="uid://cffw7itd722c7" path="res://Scenes/PrefabScenes/character_body_2d.tscn" id="1_xhfnw"]
+[ext_resource type="Texture2D" uid="uid://dfrv8y6dmyyg4" path="res://Asset/PNG/Retina/character.png" id="2_je6vr"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_4gy8w"]
+light_mode = 1
+
+[sub_resource type="Gradient" id="Gradient_xylue"]
+offsets = PackedFloat32Array(0, 0.5421687, 0.72289157)
+colors = PackedColorArray(1, 1, 1, 1, 0.39759034, 0.39759034, 0.39759034, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_je6vr"]
+gradient = SubResource("Gradient_xylue")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
 
 [node name="Player" unique_id=2090145177 instance=ExtResource("1_xhfnw")]
+light_mask = 3
+visibility_layer = 3
 scale = Vector2(4, 4)
+
+[node name="Sprite2D" parent="." index="0" unique_id=1740987335]
+light_mask = 4
+material = SubResource("CanvasItemMaterial_4gy8w")
+scale = Vector2(0.17999971, 0.17999971)
+texture = ExtResource("2_je6vr")
+
+[node name="Camera2D" type="Camera2D" parent="." index="6" unique_id=1733968149]
+position = Vector2(-236, -144)
+scale = Vector2(0.25, 0.25)
+zoom = Vector2(0.15, 0.15)
+process_callback = 0
+limit_smoothed = true
+drag_horizontal_enabled = true
+drag_vertical_enabled = true
+drag_left_margin = 0.02
+drag_top_margin = 0.02
+drag_right_margin = 0.02
+drag_bottom_margin = 0.02
+
+[node name="PointLight2D" type="PointLight2D" parent="." index="7" unique_id=1329401415]
+position = Vector2(3.0000076, 2.5000305)
+scale = Vector2(10, 8.358)
+color = Color(1, 1, 0.42745098, 1)
+range_item_cull_mask = 3
+shadow_enabled = true
+shadow_item_cull_mask = 3
+texture = SubResource("GradientTexture2D_je6vr")
+
+[node name="TimerMostrarHP" type="Timer" parent="." index="8" unique_id=629363220]
+unique_name_in_owner = true
+wait_time = 2.0

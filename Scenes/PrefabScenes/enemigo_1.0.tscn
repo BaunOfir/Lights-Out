@@ -1,0 +1,66 @@
+[gd_scene format=3 uid="uid://beam1ebgabpsp"]
+
+[ext_resource type="Script" uid="uid://cmp8qncdngyci" path="res://Scripts/enemigo1.0.gd" id="1_1eoye"]
+[ext_resource type="Texture2D" uid="uid://bf60uf4a0lrsu" path="res://Asset/PNG/Retina/guardia.png" id="2_1eoye"]
+[ext_resource type="Texture2D" uid="uid://c3ylmr6t8rqs7" path="res://Asset/PNG/Default size/Environment/environment_12.png" id="3_82rgt"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_7164t"]
+light_mode = 2
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_1a0yg"]
+radius = 140.32191
+
+[sub_resource type="Gradient" id="Gradient_1eoye"]
+offsets = PackedFloat32Array(0, 0.42548078, 0.62740386)
+colors = PackedColorArray(1, 1, 1, 1, 0.45432693, 0.45432693, 0.45432693, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_1eoye"]
+gradient = SubResource("Gradient_1eoye")
+fill = 1
+fill_from = Vector2(0.515625, 0.49479166)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_sp843"]
+radius = 49.41217
+
+[node name="Enemigo" type="CharacterBody2D" unique_id=1773956985 groups=["guardia"]]
+scale = Vector2(4, 4)
+motion_mode = 1
+wall_min_slide_angle = 0.0
+script = ExtResource("1_1eoye")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1147866689]
+light_mask = 2
+visibility_layer = 2
+material = SubResource("CanvasItemMaterial_7164t")
+position = Vector2(1.5000038, -10.249996)
+scale = Vector2(0.24275005, 0.24275005)
+texture = ExtResource("2_1eoye")
+
+[node name="Area2D" type="Area2D" parent="Sprite2D" unique_id=737484862 groups=["guardia"]]
+position = Vector2(33.75, 0)
+collision_layer = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2D/Area2D" unique_id=1902791084]
+position = Vector2(96.26149, -218.21301)
+shape = SubResource("CircleShape2D_1a0yg")
+
+[node name="Sprite2D" type="Sprite2D" parent="Sprite2D/Area2D" unique_id=314436890]
+modulate = Color(1, 1, 1, 0.27058825)
+position = Vector2(100.270645, -217.64029)
+scale = Vector2(10.503518, 10.503518)
+texture = ExtResource("3_82rgt")
+
+[node name="PointLight2D" type="PointLight2D" parent="Sprite2D/Area2D/Sprite2D" unique_id=435329555]
+color = Color(1, 0.8156863, 0, 1)
+texture = SubResource("GradientTexture2D_1eoye")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1091623961]
+shape = SubResource("CircleShape2D_sp843")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="." unique_id=690816207]
+path_desired_distance = 300.0
+debug_enabled = true
+debug_path_custom_color = Color(0.8331668, 0, 0, 1)
+
+[connection signal="body_entered" from="Sprite2D/Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="Sprite2D/Area2D" to="." method="_on_area_2d_body_exited"]

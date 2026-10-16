@@ -7,7 +7,7 @@
 size = Vector2(85, 77)
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_4gy8w"]
-polygon = PackedVector2Array(-32, -32, -32, 32, 32, 32, 32, -32)
+polygon = PackedVector2Array(-29, 29, 29, 29, 29, -29.5, -29, -29.25)
 
 [node name="Escondite" type="Area2D" unique_id=1155506479]
 script = ExtResource("1_1nkhh")
@@ -17,10 +17,11 @@ position = Vector2(2.5, -2.5)
 shape = SubResource("RectangleShape2D_sp843")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=116855577]
+light_mask = 0
 scale = Vector2(4, 4)
 texture = ExtResource("1_b88y1")
 
-[node name="LightOccluder2D" type="LightOccluder2D" parent="." unique_id=1317364348]
+[node name="LightOccluder2D" type="LightOccluder2D" parent="." unique_id=255362401]
 scale = Vector2(4, 4)
 occluder = SubResource("OccluderPolygon2D_4gy8w")
 

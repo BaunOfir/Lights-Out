@@ -8,16 +8,18 @@
 radius = 67.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_sp843"]
-radius = 84.48077
+radius = 49.41217
 
 [node name="Enemigo" type="AnimatableBody2D" unique_id=911986019 groups=["guardia"]]
 scale = Vector2(4, 4)
 script = ExtResource("1_a5tj2")
+velocidad = 150.0
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1147866689]
 texture = ExtResource("2_a5tj2")
 
 [node name="Area2D" type="Area2D" parent="Sprite2D" unique_id=737484862 groups=["guardia"]]
+position = Vector2(33.75, 0)
 collision_layer = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2D/Area2D" unique_id=1902791084]
@@ -33,4 +35,9 @@ texture = ExtResource("3_moxti")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1091623961]
 shape = SubResource("CircleShape2D_sp843")
 
+[node name="rotacion" type="Timer" parent="." unique_id=1462477442]
+wait_time = 2.0
+
 [connection signal="body_entered" from="Sprite2D/Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="Sprite2D/Area2D" to="." method="_on_area_2d_body_exited"]
+[connection signal="timeout" from="rotacion" to="." method="_on_rotacion_timeout"]

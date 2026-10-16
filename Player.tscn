@@ -1,5 +1,0 @@
-[gd_scene format=3 uid="uid://fc3x80j1sfno"]
-
-[ext_resource type="PackedScene" uid="uid://cffw7itd722c7" path="res://character_body_2d.tscn" id="1_xhfnw"]
-
-[node name="CharacterBody2D" unique_id=2090145177 instance=ExtResource("1_xhfnw")]

@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://pu8uld8b8id"]
+
+[ext_resource type="Script" uid="uid://bcr5y651clskp" path="res://Scripts/cerrojo.gd" id="1_jxeys"]
+[ext_resource type="Texture2D" uid="uid://o3dv3ov8uc7e" path="res://Asset/PNG/Retina/Crates/crate_01.png" id="2_2ltf3"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_sp843"]
+size = Vector2(135, 121)
+
+[node name="Cerrojo" type="StaticBody2D" unique_id=1332303947]
+script = ExtResource("1_jxeys")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1398747197]
+texture = ExtResource("2_2ltf3")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=673035394]
+position = Vector2(-1.5, 4.5)
+shape = SubResource("RectangleShape2D_sp843")

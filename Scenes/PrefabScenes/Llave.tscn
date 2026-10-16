@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://cgswwsje58tqn"]
+
+[ext_resource type="Texture2D" uid="uid://coqda8mcrry1d" path="res://Asset/PNG/Retina/Environment/environment_02.png" id="1_ldvta"]
+[ext_resource type="Script" uid="uid://bnljces824cno" path="res://Scripts/Llave.gd" id="2_byrrb"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_sp843"]
+size = Vector2(46, 39)
+
+[node name="Llave" type="Area2D" unique_id=248778074]
+script = ExtResource("2_byrrb")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=533721296]
+texture = ExtResource("1_ldvta")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1971659573]
+position = Vector2(1, 3.5)
+shape = SubResource("RectangleShape2D_sp843")
+
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]
