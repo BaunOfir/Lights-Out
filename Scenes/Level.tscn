@@ -95,7 +95,7 @@ position = Vector2(161, 985.00006)
 scale = Vector2(5.0951333, 4.627315)
 
 [node name="Player" parent="." unique_id=2090145177 instance=ExtResource("4_ienac")]
-position = Vector2(1766, 332)
+position = Vector2(233, 647)
 
 [node name="Escondite" parent="." unique_id=1155506479 instance=ExtResource("2_xylue")]
 position = Vector2(-556.00006, 792.00006)

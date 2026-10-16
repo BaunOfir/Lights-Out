@@ -53,6 +53,7 @@ func _physics_process(delta: float) -> void:
 	# Persige al jugador /utilizo la target de la navegacion
 	# y le adjudico la posicion del jugador en la esena
 	elif persiguiendo and jugador != null and not jugador_escondido:
+		$Alerta.show()
 		navegacion.target_position = jugador.global_position
 
 	# Patrulla entre 2 puntos el target en esta oportunidad
@@ -94,6 +95,7 @@ func _physics_process(delta: float) -> void:
 
 	# volver al inicio de patrulla
 	elif not volviendo and not persiguiendo and patrullaje_activo:
+		$Alerta.hide()
 		if global_position.distance_to(navegacion.target_position) < 10.0:
 			ir_final = not ir_final
 			velocity = Vector2.ZERO
@@ -117,6 +119,7 @@ func _on_area_2d_body_exited(body: Node2D) -> void:
 
 # jugador escondido
 func _on_escondite_jugador_escondido() -> void:
+	$Alerta.hide()
 	jugador_escondido = true
 	dentro_luz = false
 

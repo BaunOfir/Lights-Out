@@ -51,3 +51,5 @@ texture = SubResource("GradientTexture2D_je6vr")
 [node name="TimerMostrarHP" type="Timer" parent="." index="8" unique_id=629363220]
 unique_name_in_owner = true
 wait_time = 2.0
+
+[connection signal="body_exited" from="AreaPosecion" to="." method="_on_area_posecion_body_exited"]

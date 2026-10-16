@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://cmp8qncdngyci" path="res://Scripts/enemigo1.0.gd" id="1_1eoye"]
 [ext_resource type="Texture2D" uid="uid://bf60uf4a0lrsu" path="res://Asset/PNG/Retina/guardia.png" id="2_1eoye"]
 [ext_resource type="Texture2D" uid="uid://c3ylmr6t8rqs7" path="res://Asset/PNG/Default size/Environment/environment_12.png" id="3_82rgt"]
+[ext_resource type="Texture2D" uid="uid://rmcroqn131nt" path="res://Asset/PNG/Retina/alerta.png" id="4_0g2ga"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_7164t"]
 light_mode = 2
@@ -61,6 +62,12 @@ shape = SubResource("CircleShape2D_sp843")
 path_desired_distance = 300.0
 debug_enabled = true
 debug_path_custom_color = Color(0.8331668, 0, 0, 1)
+
+[node name="Alerta" type="Sprite2D" parent="." unique_id=1636840496]
+position = Vector2(-32.5, -12.750004)
+rotation = 2.7464488
+scale = Vector2(0.063907124, 0.063907124)
+texture = ExtResource("4_0g2ga")
 
 [connection signal="body_entered" from="Sprite2D/Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="body_exited" from="Sprite2D/Area2D" to="." method="_on_area_2d_body_exited"]
