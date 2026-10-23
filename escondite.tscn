@@ -1,0 +1,20 @@
+[gd_scene format=3 uid="uid://dg5q7y0kd8ktv"]
+
+[ext_resource type="Script" uid="uid://b5wogwaoa4fb3" path="res://escondite.gd" id="1_1nkhh"]
+[ext_resource type="Texture2D" uid="uid://bob4bj7t41k6b" path="res://PNG/Default size/Crates/crate_02.png" id="1_b88y1"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_sp843"]
+size = Vector2(85, 77)
+
+[node name="Escondite" type="Area2D" unique_id=1155506479]
+script = ExtResource("1_1nkhh")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2015038332]
+position = Vector2(2.5, -2.5)
+shape = SubResource("RectangleShape2D_sp843")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=116855577]
+texture = ExtResource("1_b88y1")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]

@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://b5txajgxk51sx"]
+
+[ext_resource type="Script" uid="uid://cffsrlx0gdh3f" path="res://Scripts/guarderia.gd" id="1_3n4bb"]
+
+[node name="Guarderia" type="Node2D" unique_id=1020484970]
+script = ExtResource("1_3n4bb")

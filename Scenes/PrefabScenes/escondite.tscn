@@ -9,7 +9,7 @@ size = Vector2(85, 77)
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_4gy8w"]
 polygon = PackedVector2Array(-29, 29, 29, 29, 29, -29.5, -29, -29.25)
 
-[node name="Escondite" type="Area2D" unique_id=1155506479]
+[node name="Escondite" type="Area2D" unique_id=1155506479 groups=["escondites"]]
 script = ExtResource("1_1nkhh")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2015038332]

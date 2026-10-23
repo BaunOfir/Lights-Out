@@ -6,7 +6,10 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_sp843"]
 size = Vector2(135, 121)
 
-[node name="Cerrojo" type="StaticBody2D" unique_id=1332303947]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_02lh4"]
+size = Vector2(99, 82)
+
+[node name="Cerrojo" type="Area2D" unique_id=920424101]
 script = ExtResource("1_jxeys")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1398747197]
@@ -15,3 +18,11 @@ texture = ExtResource("2_2ltf3")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=673035394]
 position = Vector2(-1.5, 4.5)
 shape = SubResource("RectangleShape2D_sp843")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=1745141765]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=1701466302]
+position = Vector2(-1.5, -3)
+shape = SubResource("RectangleShape2D_02lh4")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

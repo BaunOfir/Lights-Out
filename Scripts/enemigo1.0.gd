@@ -1,18 +1,18 @@
 
 extends CharacterBody2D
 
-@export var velocidad: float = 100.0
+@export var velocidad: float = 200.0
 @export var dano_luz: int = 10
 @export var intervalo_dano: float = 1.0
-@export var punto_final: Vector2 = Vector2(1300, 0)
+@export var punto_final: Vector2 = Vector2(348,25)
 @export var velocidad_rotacion: float = 5.0
 
 @onready var navegacion: NavigationAgent2D = $NavigationAgent2D
 
 var jugador: Node2D = null
-var posicion_inicial: Vector2
+var posicion_inicial: Vector2=Vector2(-899,71)
 
-var volviendo: bool = false
+var volviendo: bool = true
 var persiguiendo: bool = false
 var dentro_luz: bool = false
 var jugador_escondido: bool = false
@@ -29,17 +29,17 @@ var patrullaje_activo: bool = true
 # y no pasa por las partes importantes del metodo _process
 
 # ALTERNATIVAMENTE:
-# Crear un punto de respawn de guardias.
-# creamos un segundo guardia, sacado de un pool comun
-# lo "respawneamos" (simplemente aparece en la posicion de la estacion de guardias)
+# Crear un punto de respawn de guardias.-
+# creamos un segundo guardia, sacado de un pool comun-
+# lo "respawneamos" (simplemente aparece en la posicion de la estacion de guardias)-
 #... la guarderia
 # le hacemos remove_child al guardia, lo ponemos en un array en un manager global
 # y cuando vuelve a la escena, simplemente pathfindea.
 # lo ideal seria que tuviera un estado RETORNANDO
 
 func _ready() -> void:
-	# Guardo la posición inicial del enemigo
-	posicion_inicial = global_position
+	
+	
 
 	await get_tree().physics_frame
 
@@ -49,7 +49,7 @@ func _physics_process(delta: float) -> void:
 	# Regresa al inicio del patrullaje
 	if volviendo:
 		navegacion.target_position = posicion_inicial
-
+		$Alerta.hide()
 	# Persige al jugador /utilizo la target de la navegacion
 	# y le adjudico la posicion del jugador en la esena
 	elif persiguiendo and jugador != null and not jugador_escondido:
@@ -103,10 +103,11 @@ func _physics_process(delta: float) -> void:
 
 # dentro de la luz
 func _on_area_2d_body_entered(body: Node2D) -> void:
-	if body.is_in_group("Player") and not jugador_escondido and not volviendo:
+	if body.is_in_group("Player") and not jugador_escondido:
 		jugador = body
 		dentro_luz = true
 		persiguiendo = true
+		volviendo=false
 		print("¡DETRAS DE TI INBECIL!")
 
 

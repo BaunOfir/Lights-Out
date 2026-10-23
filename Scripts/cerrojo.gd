@@ -1,4 +1,4 @@
-extends StaticBody2D
+extends Area2D
 
 @onready var colision = $CollisionShape2D
 
@@ -11,4 +11,14 @@ func _process(_delta: float) -> void:
 	if jugador == null:
 		return
 
-	colision.set_deferred("disabled", jugador.tiene_llave)
+	
+
+
+func _on_body_entered(body: Node2D) -> void:
+	if body.is_in_group("Player")and jugador.tiene_llave==true:
+		jugador.tiene_llave=false
+		var ui = get_tree().get_first_node_in_group("UI")
+		
+		ui.ocultar_llave() 
+		queue_free()
+	pass # Replace with function body.
